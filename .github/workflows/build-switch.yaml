@@ -1,0 +1,29 @@
+name: Build Nintendo Switch
+
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: 'devkitpro/devkita64'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+      - name: Build
+        run: |
+          mkdir -p build
+          cd build
+          cmake -G Ninja -DCMAKE_TOOLCHAIN_FILE=$DEVKITPRO/cmake/Switch.cmake -DBUILD_TESTS:BOOL=OFF -DENABLE_AMAZON_S3:BOOL=OFF ..
+          ninja
+
+      - name: Upload artifacts
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: play-switch-build
+          path: |
+            build/Source/ui_switch/Play_Switch.elf
+            build/Source/ui_switch/Play_Switch.nro

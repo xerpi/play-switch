@@ -167,7 +167,7 @@ DiskUtils::OpticalMediaPtr DiskUtils::CreateOpticalMediaFromPath(const fs::path&
 	{
 		stream = std::make_shared<Framework::Win32::CVolumeStream>(imagePath.native().c_str());
 	}
-#elif !defined(__ANDROID__) && !TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
+#elif !defined(__ANDROID__) && !TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR && !defined(__SWITCH__)
 	else if(imagePath.string().find("/dev/") == 0)
 	{
 		try

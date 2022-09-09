@@ -122,6 +122,9 @@ if(ICUUC_FOUND)
 endif()
 
 if(NOT TARGET libchdr)
+	if(TARGET_PLATFORM_SWITCH)
+		set(WITH_SYSTEM_ZLIB ON CACHE BOOL "Force zlib Switch port")
+	endif()
 	add_subdirectory(
 		${CMAKE_CURRENT_SOURCE_DIR}/../deps/libchdr/
 		${CMAKE_CURRENT_BINARY_DIR}/libchdr

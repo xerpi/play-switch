@@ -77,6 +77,10 @@ if(BUILD_PLAY)
 		if(TARGET_PLATFORM_JS)
 			add_subdirectory(Source/ui_js)
 		endif(TARGET_PLATFORM_JS)
+
+		if(TARGET_PLATFORM_SWITCH)
+			add_subdirectory(Source/ui_switch)
+		endif(TARGET_PLATFORM_SWITCH)
 	endif()
 endif(BUILD_PLAY)
 

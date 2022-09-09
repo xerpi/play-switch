@@ -311,3 +311,13 @@ npm start
 ##### Browser environment caveats #####
 - Write protection on memory pages is not supported, thus, games loading modules on the EE might not work properly since JIT cache can't be invalidated.
 - No control over floating point environment, default rounding mode is used, which can cause issues in some games.
+
+### Building for Nintendo Switch ###
+With *devkitPro*'s [*devkitA64*](https://devkitpro.org/wiki/Getting_Started), [*libnx*](https://github.com/switchbrew/libnx) and [*deko3d*](https://github.com/devkitPro/deko3d) installed:
+   ```bash
+   mkdir build
+   cd build
+   cmake -DCMAKE_TOOLCHAIN_FILE="${DEVKITPRO}/cmake/Switch.cmake" -DBUILD_TESTS:BOOL=OFF -DENABLE_AMAZON_S3:BOOL=OFF ..
+   make Play_Switch_nro -j$(nproc)
+   ```
+This will generate `Source/ui_switch/Play_Switch.nro`, ready to be executed.

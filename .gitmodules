@@ -1,18 +1,18 @@
 [submodule "deps/Dependencies"]
 	path = deps/Dependencies
-	url = https://github.com/jpd002/Play-Dependencies.git
+	url = https://github.com/xerpi/play-switch-dependencies.git
 [submodule "deps/Framework"]
 	path = deps/Framework
-	url = https://github.com/jpd002/Play--Framework.git
+	url = https://github.com/xerpi/play-switch-framework.git
 [submodule "deps/CodeGen"]
 	path = deps/CodeGen
-	url = https://github.com/jpd002/Play--CodeGen.git
+	url = https://github.com/xerpi/play-switch-codegen.git
 [submodule "deps/Nuanceur"]
 	path = deps/Nuanceur
 	url = https://github.com/jpd002/Nuanceur.git
 [submodule "deps/libchdr"]
 	path = deps/libchdr
-	url = https://github.com/jpd002/libchdr.git
+	url = https://github.com/xerpi/play-switch-libchdr.git
 [submodule "deps/AltKit"]
 	path = deps/AltKit
 	url = https://github.com/jpd002/AltKit.git

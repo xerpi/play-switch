@@ -230,6 +230,8 @@ void CEeExecutor::SetMemoryProtected(void* addr, size_t size, bool protect)
 	size = size + (m_pageSize - 1) & ~(m_pageSize - 1);
 	int result = mprotect(addr, size, protect ? PROT_READ : PROT_READ | PROT_WRITE);
 	assert(result >= 0);
+#elif defined(__SWITCH__)
+	// TODO
 #else
 	assert(false);
 #endif

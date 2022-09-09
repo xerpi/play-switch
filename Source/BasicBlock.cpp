@@ -108,7 +108,7 @@ void CBasicBlock::Compile()
 		jmethod.class_file_name = "";
 		jmethod.source_file_name = __FILE__;
 
-		jmethod.method_load_address = m_function.GetCode();
+		jmethod.method_load_address = m_function.GetCodeRx();
 		jmethod.method_size = m_function.GetSize();
 		jmethod.line_number_size = 0;
 
@@ -400,8 +400,8 @@ void CBasicBlock::LinkBlock(LINK_SLOT linkSlot, CBasicBlock* otherBlock)
 	assert(m_linkBlock[linkSlot] == nullptr);
 	m_linkBlock[linkSlot] = otherBlock;
 #endif
-	auto patchValue = reinterpret_cast<uintptr_t>(otherBlock->m_function.GetCode());
-	auto code = reinterpret_cast<uint8*>(m_function.GetCode());
+	auto patchValue = reinterpret_cast<uintptr_t>(otherBlock->m_function.GetCodeRx());
+	auto code = reinterpret_cast<uint8*>(m_function.GetCodeRw());
 	m_function.BeginModify();
 	*reinterpret_cast<uintptr_t*>(code + m_linkBlockTrampolineOffset[linkSlot]) = patchValue;
 	m_function.EndModify();
@@ -419,7 +419,7 @@ void CBasicBlock::UnlinkBlock(LINK_SLOT linkSlot)
 	m_linkBlock[linkSlot] = nullptr;
 #endif
 	auto patchValue = (linkSlot == LINK_SLOT_NEXT) ? reinterpret_cast<uintptr_t>(&NextBlockTrampoline) : reinterpret_cast<uintptr_t>(&BranchBlockTrampoline);
-	auto code = reinterpret_cast<uint8*>(m_function.GetCode());
+	auto code = reinterpret_cast<uint8*>(m_function.GetCodeRw());
 	m_function.BeginModify();
 	*reinterpret_cast<uintptr_t*>(code + m_linkBlockTrampolineOffset[linkSlot]) = patchValue;
 	m_function.EndModify();
